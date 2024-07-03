@@ -140,6 +140,7 @@ impl TickUpdate {
 
 #[account(zero_copy(unsafe))]
 #[repr(packed)]
+#[derive(Debug)]
 pub struct TickArray {
     pub start_tick_index: i32,
     pub ticks: [Tick; TICK_ARRAY_SIZE_USIZE],
