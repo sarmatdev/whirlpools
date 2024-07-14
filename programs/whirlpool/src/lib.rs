@@ -18,8 +18,6 @@ pub mod state;
 pub mod tests;
 #[doc(hidden)]
 pub mod util;
-#[doc(hidden)]
-pub mod security;
 
 use crate::state::{OpenPositionBumps, OpenPositionWithMetadataBumps, WhirlpoolBumps};
 use crate::util::RemainingAccountsInfo;
@@ -647,7 +645,11 @@ pub mod whirlpool {
         reward_index: u8,
         remaining_accounts_info: Option<RemainingAccountsInfo>,
     ) -> Result<()> {
-        return instructions::v2::collect_reward::handler(ctx, reward_index, remaining_accounts_info);
+        return instructions::v2::collect_reward::handler(
+            ctx,
+            reward_index,
+            remaining_accounts_info,
+        );
     }
 
     /// Withdraw liquidity from a position in the Whirlpool. This call also updates the position's accrued fees and rewards.
@@ -727,11 +729,7 @@ pub mod whirlpool {
         tick_spacing: u16,
         initial_sqrt_price: u128,
     ) -> Result<()> {
-        return instructions::v2::initialize_pool::handler(
-            ctx,
-            tick_spacing,
-            initial_sqrt_price,
-        );
+        return instructions::v2::initialize_pool::handler(ctx, tick_spacing, initial_sqrt_price);
     }
 
     /// Initialize reward for a Whirlpool. A pool can only support up to a set number of rewards.
